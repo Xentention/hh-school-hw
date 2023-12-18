@@ -74,16 +74,15 @@ SELECT resume_id, candidate_id, description, area_id,
 	specialization_id, creation_time
 FROM test_data;
 
-WITH test_data (response_id, candidate_id, resume_id, vacancy_id,
+WITH test_data (response_id, resume_id, vacancy_id,
 		creation_time, is_accepted) AS (
 	SELECT generate_series(1, 200000) AS response_id,
-		random() * ((SELECT count(*) FROM candidates) - 1) + 1 AS candidate_id,
 		random() * ((SELECT count(*) FROM resumes) - 1) + 1 AS resume_id,
 		random() * ((SELECT count(*) FROM vacancies) - 1) + 1 AS vacancy_id,
         TIMESTAMPTZ '2018-10-20 10:00:00' + random() * (TIMESTAMPTZ '2018-10-20 10:00:00' - TIMESTAMPTZ '2023-12-20 10:00:00') AS creation_time,
 		random() > 0.5 AS is_accepted)
-INSERT INTO responses(response_id, candidate_id, resume_id, vacancy_id,
+INSERT INTO responses(response_id, resume_id, vacancy_id,
 			creation_time, is_accepted)
-SELECT response_id, candidate_id, resume_id, vacancy_id,
+SELECT response_id, resume_id, vacancy_id,
 	creation_time, is_accepted
 FROM test_data;

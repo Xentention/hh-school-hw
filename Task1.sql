@@ -57,13 +57,11 @@ CREATE TABLE resumes (
 	creation_time TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-
+--id кандидата можно получить и из резюме
 CREATE TABLE responses (
 	response_id SERIAL PRIMARY KEY,
-	candidate_id INTEGER NOT NULL REFERENCES candidates (candidate_id),
 	resume_id INTEGER NOT NULL REFERENCES resumes (resume_id),
 	vacancy_id INTEGER NOT NULL REFERENCES vacancies (vacancy_id),
 	creation_time TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 	is_accepted BOOLEAN
 );
-	

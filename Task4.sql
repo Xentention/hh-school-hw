@@ -15,4 +15,3 @@ resumes_per_months AS (
     LIMIT 1)
 SELECT count_vacancies, count_resumes
 FROM vacancies_per_months AS v, resumes_per_months as r;
-
